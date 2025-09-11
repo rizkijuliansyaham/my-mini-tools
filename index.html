@@ -1,87 +1,99 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Opacity → Alpha Calculator</title>
-  <style>
-    body {
-      font-family: "Segoe UI", sans-serif;
-      background: linear-gradient(135deg, #f9fafb, #e5e7eb);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      height: 100vh;
-      margin: 0;
-    }
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Opacity → Alpha Calculator</title>
+    <style>
+        body {
+            font-family: "Inter", "Segoe UI", sans-serif;
+            background: #f3f4f6;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+            margin: 0;
+        }
 
-    .card {
-      background: white;
-      border-radius: 1rem;
-      box-shadow: 0 4px 12px rgba(0,0,0,0.1);
-      padding: 2rem;
-      max-width: 400px;
-      width: 100%;
-      text-align: center;
-    }
+        .card {
+            background: white;
+            border-radius: 1rem;
+            box-shadow: 0 6px 16px rgba(0, 0, 0, 0.1);
+            padding: 2rem;
+            max-width: 350px;
+            width: 100%;
+            text-align: center;
+        }
 
-    h1 {
-      font-size: 1.5rem;
-      margin-bottom: 1rem;
-      color: #111827;
-    }
+        h1 {
+            font-size: 1.3rem;
+            margin-bottom: 1.2rem;
+            color: #111827;
+            font-weight: 600;
+        }
 
-    input {
-      width: 100%;
-      padding: 0.8rem;
-      font-size: 1rem;
-      border: 1px solid #d1d5db;
-      border-radius: 0.5rem;
-      outline: none;
-      margin-bottom: 1rem;
-      transition: border 0.2s ease;
-      text-align: center;
-    }
+        input {
+            width: 80%;
+            /* jangan full 100% */
+            max-width: 220px;
+            /* biar tidak terlalu panjang */
+            padding: 0.8rem;
+            font-size: 1rem;
+            border: 1px solid #d1d5db;
+            border-radius: 0.6rem;
+            outline: none;
+            text-align: center;
+            transition: border 0.2s ease, box-shadow 0.2s ease;
+            margin: 0 auto;
+            /* center horizontal */
+            display: block;
+        }
 
-    input:focus {
-      border-color: #2563eb;
-    }
 
-    .result {
-      margin-top: 0.5rem;
-      font-size: 1.2rem;
-      font-weight: 600;
-      color: #2563eb;
-    }
-  </style>
+        input:focus {
+            border-color: #2563eb;
+            box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.3);
+        }
+
+        .result {
+            margin-top: 1rem;
+            font-size: 1.2rem;
+            font-weight: 600;
+            color: #2563eb;
+        }
+
+        .hint {
+            margin-top: 0.5rem;
+            font-size: 0.85rem;
+            color: #6b7280;
+        }
+    </style>
 </head>
+
 <body>
-  <div class="card">
-    <h1>Opacity → Alpha</h1>
-    <input 
-      type="number" 
-      id="opacity" 
-      step="0.01" 
-      min="0" 
-      max="1" 
-      placeholder="Masukkan opacity (0.0 - 1.0)" 
-      oninput="calculate()" 
-    />
-    <div class="result" id="result"></div>
-  </div>
+    <div class="card">
+        <h1>Opacity → Alpha</h1>
+        <input type="number" id="opacity" step="0.01" min="0" max="1" placeholder="Masukkan opacity (0.0 - 1.0)"
+            oninput="calculate()" />
+        <div class="result" id="result">Alpha = 0</div>
+        <div class="hint">💡 Masukkan nilai antara 0.0 – 1.0</div>
+    </div>
 
-  <script>
-    function calculate() {
-      const opacity = parseFloat(document.getElementById("opacity").value);
-      const resultEl = document.getElementById("result");
-      if (isNaN(opacity) || opacity < 0 || opacity > 1) {
-        resultEl.innerText = "Masukkan angka 0.0 - 1.0";
-        return;
-      }
-      const alpha = Math.round(opacity * 255);
-      resultEl.innerText = `Alpha = ${alpha}`;
-    }
-  </script>
+    <script>
+        function calculate() {
+            const opacity = parseFloat(document.getElementById("opacity").value);
+            const resultEl = document.getElementById("result");
+            if (isNaN(opacity) || opacity < 0 || opacity > 1) {
+                resultEl.innerText = "Masukkan angka valid (0.0 - 1.0)";
+                resultEl.style.color = "red";
+                return;
+            }
+            const alpha = Math.round(opacity * 255);
+            resultEl.innerText = `Alpha = ${alpha}`;
+            resultEl.style.color = "#2563eb";
+        }
+    </script>
 </body>
-</html>
 
+</html>
